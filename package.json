@@ -1,0 +1,16 @@
+{ "name":              "tagged"
+, "version":           "0.1.0"
+, "description":       "Feature-rich colored logger."
+, "author":            "Yuri Hater <paxidently@yandex.com>"
+, "scripts":         { "test": "test/test.js"                                  }
+, "main":              "lib/tagged.js"
+, "repository":      { "type": "git"
+                     , "url":  "https://github.com/paxidently/tagged"          }
+, "bugs":            { "url":  "https://github.com/paxidently/tagged/issues"   }
+, "keywords":        [ "log"
+                     , "ansi"
+                     , "colors"
+                     , "console"                                               ]
+, "devDependencies": { "nodeunit": "0.9.x"                                     }
+, "license":           "MIT"
+}
