@@ -2,7 +2,7 @@
 , "version":           "0.1.0"
 , "description":       "Feature-rich colored logger."
 , "author":            "Yuri Hater <paxidently@yandex.com>"
-, "scripts":         { "test": "test/test.js"                                  }
+, "scripts":         { "test": "./node_modules/.bin/nodeunit test/test.js"     }
 , "main":              "lib/tagged.js"
 , "repository":      { "type": "git"
                      , "url":  "https://github.com/paxidently/tagged"          }
