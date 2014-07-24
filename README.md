@@ -100,10 +100,17 @@ Remove style definition.
 
  *  `string name` — style name.
 
-### tagged([<object>|<string>]*)
+### tagged([&lt;object&gt;|&lt;string&gt;]*)
 
 `<object>` can contain one or more name-value pairs.
-Examples: `{ em: 'Some text.\n', plain: 'Some other text.\n', strong: 'Bold text.' }`.
+Example:
+````javascript
+{
+    em: 'Some text.\n',
+    plain: 'Some other text.\n',
+    strong: 'Bold text.'
+}
+````
 
 
 
