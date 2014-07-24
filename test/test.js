@@ -34,7 +34,7 @@ module.exports = {
             borderStyle: '\u001b[31m',
             borderLeft: '',
             borderRight: '',
-            base: 10,
+            radix: 10,
             align: 'left',
             trim: true,
             overflow: 'ellipsis'
@@ -46,7 +46,7 @@ module.exports = {
             borderRight: ' ]',
             borderStyle: 'green',
             width: 8,
-            base: 16,
+            radix: 16,
             zeroes: true,
             plus: true,
             align: 'right',
@@ -59,7 +59,7 @@ module.exports = {
             borderLeft: '\u001b[32m[ \u001b[0m',
             borderRight: '\u001b[32m ]\u001b[0m',
             width: 8,
-            base: 16,
+            radix: 16,
             zeroes: true,
             plus: true,
             align: 'right',
@@ -80,7 +80,7 @@ module.exports = {
     
     format: function (test) {
         // Multiple arguments + undefined tags
-        test.equals(tagged.format({ undefinedTag: 'sample text', tag2: 'text2' }, { tag3: 'text3' }, [ { tag4: 'text4' }, { tag5: 'text5' } ]), 'sample text\ntext2\ntext3\ntext4\ntext5\n');
+        test.equals(tagged.format({ undefinedTag: 'sample text', tag2: 'text2' }, { tag3: 'text3' }, [ { tag4: 'text4' }, { tag5: 'text5' } ]), 'sample texttext2text3text4text5');
         
         // Borders + style
         tagged.add('borders', {
@@ -88,7 +88,7 @@ module.exports = {
             borderLeft: '[ ',
             borderRight: ' ]'
         });
-        test.equals(tagged.format({ borders: 'text' }), '\u001b[31m[ \u001b[0m\u001b[31mtext\u001b[0m\u001b[31m ]\u001b[0m\n');
+        test.equals(tagged.format({ borders: 'text' }), '\u001b[31m[ \u001b[0m\u001b[31mtext\u001b[0m\u001b[31m ]\u001b[0m');
         
         tagged.add('borderStyle', {
             style: 'red',
@@ -96,7 +96,7 @@ module.exports = {
             borderLeft: '[ ',
             borderRight: ' ]'
         });
-        test.equals(tagged.format({ borderStyle: 'text' }), '\u001b[32m[ \u001b[0m\u001b[31mtext\u001b[0m\u001b[32m ]\u001b[0m\n');
+        test.equals(tagged.format({ borderStyle: 'text' }), '\u001b[32m[ \u001b[0m\u001b[31mtext\u001b[0m\u001b[32m ]\u001b[0m');
         
         // Align + width
         tagged.add('right', {
@@ -104,20 +104,20 @@ module.exports = {
             align: 'right',
             width: 10
         });
-        test.equals(tagged.format({ right: 'text' }), '\u001b[31m      text\u001b[0m\n');
+        test.equals(tagged.format({ right: 'text' }), '\u001b[31m      text\u001b[0m');
         
         tagged.add('center', {
             style: 'red',
             align: 'center',
             width: 10
         });
-        test.equals(tagged.format({ center: 'text' }), '\u001b[31m   text   \u001b[0m\n');
+        test.equals(tagged.format({ center: 'text' }), '\u001b[31m   text   \u001b[0m');
         
         tagged.add('left', {
             style: 'red',
             width: 10
         });
-        test.equals(tagged.format({ left: 'text' }), '\u001b[31mtext      \u001b[0m\n');
+        test.equals(tagged.format({ left: 'text' }), '\u001b[31mtext      \u001b[0m');
         
         // Overflow + width
         tagged.add('visible', {
@@ -125,27 +125,27 @@ module.exports = {
             width: 2,
             overflow: 'visible'
         });
-        test.equals(tagged.format({ visible: 'text' }), '\u001b[31mtext\u001b[0m\n');
+        test.equals(tagged.format({ visible: 'text' }), '\u001b[31mtext\u001b[0m');
         
         tagged.add('ellipsis', {
             style: 'red',
             width: 2
         });
-        test.equals(tagged.format({ ellipsis: 'text' }), '\u001b[31mt…\u001b[0m\n');
+        test.equals(tagged.format({ ellipsis: 'text' }), '\u001b[31mt…\u001b[0m');
         
         tagged.add('hidden', {
             style: 'red',
             width: 2,
             overflow: 'hidden'
         });
-        test.equals(tagged.format({ hidden: 'text' }), '\u001b[31mte\u001b[0m\n');
+        test.equals(tagged.format({ hidden: 'text' }), '\u001b[31mte\u001b[0m');
         
         tagged.add('ellipsisRight', {
             style: 'red',
             width: 5,
             align: 'right'
         });
-        test.equals(tagged.format({ ellipsisRight: 'big text' }), '\u001b[31m…text\u001b[0m\n');
+        test.equals(tagged.format({ ellipsisRight: 'big text' }), '\u001b[31m…text\u001b[0m');
         
         tagged.add('hiddenRight', {
             style: 'red',
@@ -153,64 +153,64 @@ module.exports = {
             overflow: 'hidden',
             align: 'right'
         });
-        test.equals(tagged.format({ hiddenRight: 'text' }), '\u001b[31mxt\u001b[0m\n');
+        test.equals(tagged.format({ hiddenRight: 'text' }), '\u001b[31mxt\u001b[0m');
         
         // Digits
-        tagged.add('base', {
+        tagged.add('radix', {
             style: 'red',
-            base: 16
+            radix: 16
         });
-        test.equals(tagged.format({ base: 255 }), '\u001b[31mff\u001b[0m\n');
+        test.equals(tagged.format({ radix: 255 }), '\u001b[31mff\u001b[0m');
         
         tagged.add('digits', {
             style: 'red',
             digits: 4
         });
-        test.equals(tagged.format({ digits: Math.PI }), '\u001b[31m3.1415\u001b[0m\n');
+        test.equals(tagged.format({ digits: Math.PI }), '\u001b[31m3.1415\u001b[0m');
         
-        tagged.add('digitsBase', {
+        tagged.add('digitsRadix', {
             style: 'red',
-            base: 16,
+            radix: 16,
             digits: 4
         });
-        test.equals(tagged.format({ digitsBase: Math.PI }), '\u001b[31m3.243f\u001b[0m\n');
+        test.equals(tagged.format({ digitsRadix: Math.PI }), '\u001b[31m3.243f\u001b[0m');
         
-        tagged.add('zeroes', {
+        tagged.add('zeros', {
             style: 'red',
             width: 4,
             align: 'right',
-            zeroes: true
+            zeros: true
         });
-        test.equals(tagged.format({ zeroes: 3 }), '\u001b[31m0003\u001b[0m\n');
-        test.equals(tagged.format({ zeroes: -3 }), '\u001b[31m-003\u001b[0m\n');
+        test.equals(tagged.format({ zeros: 3 }), '\u001b[31m0003\u001b[0m');
+        test.equals(tagged.format({ zeros: -3 }), '\u001b[31m-003\u001b[0m');
         
         tagged.add('zeroesPlus', {
             style: 'red',
             width: 4,
             align: 'right',
-            zeroes: true,
+            zeros: true,
             plus: true
         });
-        test.equals(tagged.format({ zeroesPlus: 3 }), '\u001b[31m+003\u001b[0m\n');
+        test.equals(tagged.format({ zeroesPlus: 3 }), '\u001b[31m+003\u001b[0m');
         
         tagged.add('plus', {
             style: 'red',
             plus: true
         });
-        test.equals(tagged.format({ plus: 3 }), '\u001b[31m+3\u001b[0m\n');
-        test.equals(tagged.format({ plus: -3 }), '\u001b[31m-3\u001b[0m\n');
+        test.equals(tagged.format({ plus: 3 }), '\u001b[31m+3\u001b[0m');
+        test.equals(tagged.format({ plus: -3 }), '\u001b[31m-3\u001b[0m');
         
         // Trim
         tagged.add('trim', {
             style: 'red'
         });
-        test.equals(tagged.format({ trim: ' \n   text  \n  ' }), '\u001b[31mtext\u001b[0m\n');
+        test.equals(tagged.format({ trim: ' \n   text  \n  ' }), '\u001b[31mtext\u001b[0m');
         
         tagged.add('noTrim', {
             style: 'red',
             trim: false
         });
-        test.equals(tagged.format({ noTrim: ' \n   text  \n  ' }), '\u001b[31m \n   text  \n  \u001b[0m\n');
+        test.equals(tagged.format({ noTrim: ' \n   text  \n  ' }), '\u001b[31m \n   text  \n  \u001b[0m');
         
         
         test.done();

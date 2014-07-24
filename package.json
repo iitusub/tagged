@@ -1,6 +1,6 @@
 { "name":              "tagged"
 , "version":           "0.1.0"
-, "description":       "Feature-rich colored logger."
+, "description":       "Logger with styles and inheritance support."
 , "author":            "Yuri Hater <paxidently@yandex.com>"
 , "scripts":         { "test": "./node_modules/.bin/nodeunit test/test.js"     }
 , "main":              "lib/tagged.js"
@@ -10,7 +10,12 @@
 , "keywords":        [ "log"
                      , "ansi"
                      , "colors"
-                     , "console"                                               ]
+                     , "console"
+                     , "color"
+                     , "colorization"
+                     , "styling"
+                     , "style"
+                     , "format"                                                ]
 , "devDependencies": { "nodeunit": "0.9.x"                                     }
 , "license":           "MIT"
 }
