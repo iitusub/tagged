@@ -138,6 +138,7 @@ Example:
 ## TODO
 
  *  Write tests for `extend` property.
+ *  Add chainable API.
 
 
 
