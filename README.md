@@ -1,5 +1,7 @@
 # Tagged
 
+[![Join the chat at https://gitter.im/paxidently/tagged](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/paxidently/tagged?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Logger for Node.js with styles and inheritance support.
 
 ````bash
